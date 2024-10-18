@@ -88,7 +88,11 @@ class Abnormal extends BaseController
         // 项目必须存在
         $project = (new Projects)->find($bean->getProjectId());
         if (!$project){
-            throw new ProjectException("项目不存在");
+            //throw new ProjectException("项目不存在");
+            return json([
+                'code' => 404,
+                'msg'  => "项目不存在"
+            ]);
         }
 
         $abnormal = Abnormals::report($bean);

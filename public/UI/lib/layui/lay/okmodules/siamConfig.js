@@ -6,7 +6,8 @@ layui.define(["layer"], function (exprots) {
             /**
              * 服务器基础地址
              */
-            url:'http://www.siam.com/public/index.php',
+            // url:'http://域名配置的public目录时直接用域名/index.php',
+            url:'http://localhost/apm/public/index.php',
             /**
              * 是否前后分离
              */

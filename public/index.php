@@ -18,6 +18,8 @@ require __DIR__ . '/../vendor/autoload.php';
 $http = (new App())->http;
 
 $response = $http->run();
+// 运行用户的请求 多应用(设置admin应用)
+// $response = $http->name('api')->run();
 
 $response->send();
 

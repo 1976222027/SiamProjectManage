@@ -34,6 +34,7 @@ SPM，自己工作过程中需求，顺便整理开源，作为一个中间统�
 # 安装
 
 - clone 此git仓库到本地，php环境指向public目录，Thinkphp6.0(建议先看框架文档)
+  xp面板配置目录域名对应到public目录，否则在域名后面还要拼接/apm/public/
 - 前端页面为 ```www.root.com/UI/index.html```
 - 修改前端配置文件 ```/UI/lib/layui/lay/okmodules/siamConfig.js```文件
 - - url  api 路径  为以上部署域名指定 ```www.root.com/index.php```
@@ -41,8 +42,25 @@ SPM，自己工作过程中需求，顺便整理开源，作为一个中间统�
 - 导入根目录/database.sql到mysql数据库中
 - 修改Thinkphp程序数据库配置文件   copy根目录的.example.env  命名为.env 并且修改其中的配置项
 - 运行`composer install` 安装php组件依赖（建议切换国内镜像安装，速度比较快）
+    composer require topthink/think-multi-app
 
 # 常见问题
+Q0: 控制器不存在 app\controller\Api
+为什么提示 “控制器不存在:app\controller\Api”？
+因为安装多应用模式扩展执行的指令没有生效 php think service:discover 自动注册扩展包的系统服务。
+为什么自动注册拓展包服务失败，详见代码：
+vendor/topthink/framework/src/think/console/command/ServiceDiscover.php
+第34行代码$package['extra']['think']['services']为空，导致生成自动注册服务文件
+services.php 中没有注册的代码。
+天坑！
+怎么解决呢？
+首先找到你加入的拓展，在这里：
+vendor/composer/installed.json
+然后把所有的$package['extra']['think']['services']复制粘贴到services中，
+复制vendor/composer/installed.json中的services值到vender/services的数组中。
+以下文件的代码是读取services的地方。：
+vendor/topthink/framework/src/think/console/command/ServiceDiscover.php
+
 
 Q1: 上报到统计平台不是会影响速率吗？
 
@@ -68,3 +86,26 @@ A3:
 有的，php版本为以下地址sdk，可使用composer安装
 
 https://github.com/xuanyanwow/spm-sdk
+
+
+niginx 加个代理
+访问http://xxx.xx/apm即
+server{
+  ...
+  /apm/{
+    proxy_pass http://127.0.0.1/apm/public/;
+  }
+}
+上报接口文档
+如果域名不是对应public目录而是根目录，还要加域名/apm/public/
+
+http://域名/api/console/get_data 获取数据
+
+http://域名/index.php/api/project/get_list'
+添加项目
+http://域名/index.php/api/project/add'
+POST: project_name=项目名'
+
+http://localhost/index.php/api/abnormal/get_static
+
+http://localhost/index.php/api/abnormal/get_list?page=1&limit=10&project_id=4
