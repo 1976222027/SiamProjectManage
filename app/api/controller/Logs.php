@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Siam
+ * User: admin
  * Date: 2019/11/25
  * Time: 18:24
  */
@@ -10,6 +10,8 @@ namespace app\api\controller;
 
 
 use app\BaseController;
+
+// 日志上报接口
 
 class Logs extends BaseController
 {
@@ -27,6 +29,10 @@ class Logs extends BaseController
             'msg'  => 'success'
         ]);
     }
+    /**
+     * http://localhost/apm/public/index.php/api/logs/report
+     * POST  
+     */
 
     public function report()
     {

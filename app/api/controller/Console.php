@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Siam
+ * User: admin
  * Date: 2019/11/25
  * Time: 14:47
  */
@@ -20,6 +20,7 @@ class Console extends BaseController
         $projectNum = Projects::count();
         $exceptionNum = 0;
         $needDoExceptionNum = 0;
+        // 运行天数
         $runDay = date('Ymd') - Env::get('install.install_day');
         $min = [
             $projectNum,$exceptionNum, $needDoExceptionNum, $runDay

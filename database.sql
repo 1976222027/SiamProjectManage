@@ -5,7 +5,7 @@
  Source Server Type    : MySQL
  Source Server Version : 50725
  Source Host           : localhost:3306
- Source Schema         : siamprojectmanage
+ Source Schema         : apm
 
  Target Server Type    : MySQL
  Target Server Version : 50725
@@ -84,11 +84,13 @@ CREATE TABLE `siam_logs`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `siam_projects`;
 CREATE TABLE `siam_projects`  (
-  `project_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `project_id` varchar(8) COLLATE utf8mb4_bin NOT NULL DEFAULT '',
   `project_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `create_time` datetime(0) NULL DEFAULT NULL,
   `update_time` datetime(0) NULL DEFAULT NULL,
-  PRIMARY KEY (`project_id`) USING BTREE
+  PRIMARY KEY (`id`) USING BTREE
+  KEY `project_id` (`project_id`)
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;

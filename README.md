@@ -1,4 +1,4 @@
-Siam Project Manage
+Application Project Manage
 ===============
 
 ![logo](./public/UI/images/SiamProjectManage.jpg)
@@ -96,16 +96,50 @@ server{
     proxy_pass http://127.0.0.1/apm/public/;
   }
 }
+
 上报接口文档
+
 如果域名不是对应public目录而是根目录，还要加域名/apm/public/
 
 http://域名/api/console/get_data 获取数据
 
-http://域名/index.php/api/project/get_list'
-添加项目
-http://域名/index.php/api/project/add'
-POST: project_name=项目名'
+添加项目 POST project_name=项目名称'
+http://域名/index.php/api/project/add' 
 
-http://localhost/index.php/api/abnormal/get_static
+获取项目列表 GET
+http://localhost/apm/public/index.php/api/project/get_list 
+http://域名/index.php/api/project/get_list' 
 
-http://localhost/index.php/api/abnormal/get_list?page=1&limit=10&project_id=4
+
+异常统计 POST  project_id=项目ID'
+http://localhost/apm/public/index.php/api/abnormal/get_static
+
+项目异常统计 POST  page=1&limit=10&project_id=5
+http://localhost/apm/public/index.php/api/abnormal/get_list?page=1&limit=10&project_id=5
+
+接口统计 POST project_id=5
+http://localhost/apm/public/index.php/api/api_log/overview
+
+日志查询 POST project_id=5&log_sn=error
+http://localhost/apm/public/index.php/api/logs/query
+
+异常上报
+curl --request POST \
+  --url http://localhost/index.php/api/abnormal/report \
+  --header 'Accept: */*' \
+  --header 'Accept-Encoding: gzip, deflate, br' \
+  --header 'Connection: keep-alive' \
+  --header 'User-Agent: PostmanRuntime-ApipostRuntime/1.1.0' \
+  --data project_id=4 \
+  --data ab_class=TestExceptionClass \
+  --data ab_date=2024-11-13 \
+  --data 'ab_message=测试异常消息' \
+  --data ab_file=/www/test/File.php \
+  --data ab_line=320 \
+  --data 'ab_stack=["第1行stack","第2行stack", "第3行stack"]'
+
+  日志上报
+  http://localhost/apm/public/index.php/api/logs/report
+
+  接口上报 当做抓包
+  http://localhost/apm/public/index.php/api/api_log/report

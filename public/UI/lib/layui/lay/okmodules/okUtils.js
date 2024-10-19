@@ -10,7 +10,7 @@ layui.define(["layer", "siamConfig"], function (exprots) {
         /**
          * 服务器地址
          */
-        baseUrl: "http://www.siam.com/public/index.php",
+        baseUrl: "http://localhost/public/index.php",
         /**
          * 获取body的总宽度
          */

@@ -9,6 +9,8 @@ use app\api\model\Projects;
 use app\BaseController;
 use think\Validate;
 
+// 异常上报接口
+
 class Abnormal extends BaseController
 {
     /**
@@ -62,7 +64,7 @@ class Abnormal extends BaseController
 
     /**
      * 异常上报
-     * 测试地址 : {{api}}/api/abnormal/report
+     * 测试地址 : http://localhost/apm/public/index.php/api/abnormal/report
      * post   : project_id=10&ab_class=TestExceptionClass&ab_date=2019-11-13&ab_message=测试异常消息&ab_file=/www/test/File.php&ab_line=320&ab_stack=["第1行stack","第2行stack", "第3行stack"]
      * 可选   :
      * $ab_data 数据 json字符串 {"get":{}, "post":{}, "head":{} }...

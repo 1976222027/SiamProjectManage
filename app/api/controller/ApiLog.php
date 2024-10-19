@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Siam
+ * User: admin
  * Date: 2019/11/18
  * Time: 16:05
  */
@@ -11,6 +11,7 @@ namespace app\api\controller;
 use app\api\model\ApiLog as Model;
 use app\BaseController;
 
+// 接口上报接口
 class ApiLog extends BaseController
 {
     public function report()

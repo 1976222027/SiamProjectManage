@@ -3,6 +3,8 @@ namespace app\api\controller;
 
 use app\api\model\Projects;
 
+// 操作项目 增删查
+
 class Project
 {
     /**
@@ -19,6 +21,10 @@ class Project
         ]);
     }
 
+    /**
+     * POST  project_name=
+     * @return \think\response\Json
+     */
     public function add()
     {
         $project = Projects::add(input());
